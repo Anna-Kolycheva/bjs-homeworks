@@ -20,8 +20,9 @@ function compareArrays(arr1, arr2) {
 function memorize(fn, limit) {
 	const memory = [];
 	return function(...args) { 
-		if (memory.find(mem => compareArrays(mem.args, args)) !== undefined) {
-           return memory[memory.length - 1].result;
+		const appropriate = memory.find(mem => compareArrays(mem.args, args));
+		if (appropriate) {
+           return appropriate.result;
 		} else {
 			result = fn(...args);
 			memory.push({args: args, result: result});
@@ -44,7 +45,7 @@ function testCase(testFunction, time) {
 
 /*
 console.log(testCase(sum, `time1`)); 	 		
-// time1: 51006.801025390625 ms
+time1: 51006.801025390625 ms
 
 console.log(testCase(memorize, `time2`)); 		
 // time2: 0.220947265625 ms
