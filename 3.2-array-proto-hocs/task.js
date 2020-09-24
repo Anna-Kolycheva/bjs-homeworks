@@ -7,7 +7,7 @@ function sleep(milliseconds) {
 
 function sum(...args) {
 	// Замедление на половину секунды.
-	sleep(100); // Можно использовать другое значение замедления.
+	//sleep(100); // Можно использовать другое значение замедления.
 	return args.reduce((sum, arg) => {
     return sum += +arg;
     }, 0);
@@ -26,7 +26,7 @@ function memorize(fn, limit) {
 		} else {
 			result = fn(...args);
 			memory.push({args: args, result: result});
-			if (memory.length > 5) {
+			if (memory.length > limit) {
 				memory.unshift();
 			}
 			return result;
@@ -43,12 +43,13 @@ function testCase(testFunction, time) {
     console.timeEnd(time);
 }
 
-/*
+
 console.log(testCase(sum, `time1`)); 	 		
-time1: 51006.801025390625 ms
+//time1: 51006.801025390625 ms
+//без замедления time1: 0.36181640625 ms
 
 console.log(testCase(memorize, `time2`)); 		
-// time2: 0.220947265625 ms
+// time2: 0.14599609375 ms
 
 // memorize быстрее :)
-*/
+// без замедления тоже быстрее
